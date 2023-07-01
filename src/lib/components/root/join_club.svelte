@@ -1,17 +1,17 @@
 <script>
-	let invite_code = '';
-	let valid_codes = ['test'];
+	let inviteCode = '';
 	let errorMessage = '';
 	let isFormSubmitted = false;
 
 	const submitForm = () => {
 		isFormSubmitted = true;
-		if (invite_code.trim() === '') {
+		if (inviteCode.trim() === '') {
 			errorMessage = 'Invite code cannot be empty';
-		} else if (valid_codes.includes(invite_code)) {
-			errorMessage = 'Invite code already exists';
+		} else if (false) {
+			// TODO
+			errorMessage = 'Invite code not found';
 		} else {
-			console.log('joining club: ' + invite_code);
+			console.log('joining club: ' + inviteCode);
 			errorMessage = '';
 		}
 	};
@@ -25,7 +25,7 @@
 		<input
 			type="text"
 			placeholder="Invite code"
-			bind:value={invite_code}
+			bind:value={inviteCode}
 			class="input mt-4 mb-2"
 			class:input-error={errorMessage && isFormSubmitted}
 		/>

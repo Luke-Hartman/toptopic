@@ -1,18 +1,21 @@
 <script>
-	let club_name = '';
-	let existing_clubs = ['test'];
+	import { clubNameAlreadyExists, createClub } from '$lib/commands/clubs';
+
+	let clubName = '';
 	let errorMessage = '';
 	let isFormSubmitted = false;
 
 	const submitForm = () => {
 		isFormSubmitted = true;
-		if (club_name.trim() === '') {
+		if (clubName.trim() === '') {
 			errorMessage = 'Club name cannot be empty';
-		} else if (existing_clubs.includes(club_name)) {
+		} else if (clubNameAlreadyExists(clubName)) {
 			errorMessage = 'Club name already exists';
 		} else {
-			console.log('creating club: ' + club_name);
+			console.log('creating club: ' + clubName);
+			createClub(clubName);
 			errorMessage = '';
+			clubName = '';
 		}
 	};
 </script>
@@ -25,7 +28,7 @@
 		<input
 			type="text"
 			placeholder="Club name"
-			bind:value={club_name}
+			bind:value={clubName}
 			class="input mt-4 mb-2"
 			class:input-error={errorMessage && isFormSubmitted}
 		/>
