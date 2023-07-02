@@ -1,9 +1,17 @@
-import { writable } from 'svelte/store';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '$lib/config/firebase';
+import { readable } from 'svelte/store';
 
-export const clubs = writable({});
 
-// TODO: remove me
-clubs.set({
-	ABCD: 'STIPswfwefweS',
-	ASDF: 'S'
+// Store for the clubs collection
+
+export const clubs = readable({}, (set) => {
+	const unsubscribe = onSnapshot(collection(db, 'clubs'), (snapshot) => {
+		const value = {};
+		snapshot.forEach((doc) => {
+			value[doc.id] = doc.data().name;
+		});
+		set(value);
+	});
+	return unsubscribe;
 });

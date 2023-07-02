@@ -1,7 +1,10 @@
+import { doc, setDoc } from 'firebase/firestore';
 import { clubs } from '../stores.js';
 import { get } from 'svelte/store';
+import { db } from '$lib/config/firebase.js';
 
 function generateInviteCode() {
+	// TODO: move this to the backend
 	let code = '';
 	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
@@ -16,21 +19,21 @@ function generateInviteCode() {
 	return code;
 }
 
-export const createClub = (clubName: string) => {
-	// inviteCode should be generated on the backend
-	// checking whether the name/inviteCode is already taken should be done on the backend
+export const createClub = async (clubName: string) => {
+	// TODO: move this to the backend
 	const inviteCode = generateInviteCode();
-	clubs.update((currentClubs) => {
-		return { ...currentClubs, [inviteCode]: clubName };
+	await setDoc(doc(db, 'clubs', inviteCode), {
+		name: clubName,
 	});
 	console.log(get(clubs));
 };
 
 
 export const joinClub = async (inviteCode: string) => {
-	const randomClubName = generateInviteCode();
-	clubs.update((currentClubs) => {
-		return { ...currentClubs, [inviteCode]: randomClubName };
+	// TODO: move this to the backend
+	const randomClubName = 'generated' + inviteCode;
+	await setDoc(doc(db, 'clubs', inviteCode), {
+		name: randomClubName,
 	});
 	return true;
 };

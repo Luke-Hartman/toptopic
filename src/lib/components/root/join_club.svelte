@@ -1,4 +1,6 @@
 <script>
+	import { joinClub } from '$lib/commands/clubs';
+
 	let inviteCode = '';
 	let errorMessage = '';
 	let isFormSubmitted = false;
@@ -12,6 +14,7 @@
 			errorMessage = 'Invite code not found';
 		} else {
 			console.log('joining club: ' + inviteCode);
+			joinClub(inviteCode);
 			errorMessage = '';
 		}
 	};
