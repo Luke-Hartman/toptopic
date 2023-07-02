@@ -23,4 +23,3 @@
 		{/if}
 	{/if}
 </ol>
-{JSON.stringify($page.data)}
