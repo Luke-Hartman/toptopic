@@ -15,7 +15,7 @@
 	{#if clubName && inviteCode}
 		<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 		{#if meetingCode && meetingDate}
-			<li class="crumb"><a class="anchor" href={`/clubs/${inviteCode}`}>{clubName}</a></li>
+			<li class="crumb"><a class="anchor" href={`/club/${inviteCode}`}>{clubName}</a></li>
 			<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 			<li class="crumb">{meetingDate}</li>
 		{:else}

@@ -1,16 +1,20 @@
 <script>
 	import CreateClub from '$lib/components/root/create_club.svelte';
 	import JoinClub from '$lib/components/root/join_club.svelte';
-	import MyClubs from '$lib/components/root/my_clubs.svelte';
+	import ClubCard from '$lib/components/root/club_card.svelte';
+
+	export let data;
 </script>
 
-<div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-8">
-		<h1 class="h1 mb-4">My clubs</h1>
-		<MyClubs />
-		<div class="flex space-x-8">
-			<CreateClub />
-			<JoinClub />
-		</div>
+<h1 class="h1 mb-4">My clubs</h1>
+<div>
+	<div class="flex flex-wrap gap-4">
+		{#each Object.entries(data) as [inviteCode, clubName]}
+			<ClubCard {clubName} {inviteCode} />
+		{/each}
 	</div>
+</div>
+<div class="flex space-x-8">
+	<CreateClub />
+	<JoinClub />
 </div>
