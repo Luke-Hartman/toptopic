@@ -1,6 +1,6 @@
 export function load({ params }) {
 	return {
-		meetingCode: params.meetingCode,
+		meetingId: params.meetingId,
 		meetingDate: '2020-01-01'
 	};
 }

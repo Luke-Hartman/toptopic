@@ -1,21 +1,21 @@
-<script>
+<script lang="ts">
 	import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
 	import { faHouse } from '@fortawesome/free-solid-svg-icons';
 	import { page } from '$app/stores';
 
-	let clubName, inviteCode, meetingCode, meetingDate;
+	let clubName: string, clubId: string, meetingId: string, meetingDate: string;
 
 	$: {
-		({ clubName, inviteCode, meetingCode, meetingDate } = $page.data);
+		({ clubName, clubId, meetingId, meetingDate } = $page.data);
 	}
 </script>
 
 <ol class="breadcrumb">
 	<li class="crumb"><a class="anchor" href="/"><FontAwesomeIcon icon={faHouse} /></a></li>
-	{#if clubName && inviteCode}
+	{#if clubName && clubId}
 		<li class="crumb-separator" aria-hidden>&rsaquo;</li>
-		{#if meetingCode && meetingDate}
-			<li class="crumb"><a class="anchor" href={`/club/${inviteCode}`}>{clubName}</a></li>
+		{#if meetingId && meetingDate}
+			<li class="crumb"><a class="anchor" href={`/club/${clubId}`}>{clubName}</a></li>
 			<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 			<li class="crumb">{meetingDate}</li>
 		{:else}

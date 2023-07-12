@@ -4,7 +4,7 @@ import { createClub, joinClub } from '$lib/server/clubs';
 
 export async function load() {
     const snapshot = await getDocs(collection(db, 'clubs'));
-    const clubs = {};
+    const clubs: Record<string, string> = {};
     snapshot.forEach((doc) => {
         clubs[doc.id] = doc.data().name;
     });
@@ -22,8 +22,8 @@ export const actions = {
     },
     joinClub: async ({ request }) => {
         const formData = await request.formData();
-        const inviteCode = String(formData.get('inviteCode'));
-        await joinClub(inviteCode);
+        const clubId = String(formData.get('clubId'));
+        await joinClub(clubId);
         return {
             success: true
         };

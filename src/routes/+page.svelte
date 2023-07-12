@@ -9,8 +9,8 @@
 <h1 class="h1 mb-4">My clubs</h1>
 <div>
 	<div class="flex flex-wrap gap-4">
-		{#each Object.entries(data) as [inviteCode, clubName]}
-			<ClubCard {clubName} {inviteCode} />
+		{#each Object.entries(data) as [clubId, clubName]}
+			<ClubCard {clubName} {clubId} />
 		{/each}
 	</div>
 </div>
