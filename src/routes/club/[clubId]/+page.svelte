@@ -1,10 +1,11 @@
 <script lang="ts">
 	import CopyInviteCode from '$lib/components/copy_invite_code.svelte';
 	import CreateMeeting from '$lib/components/root/club/create_meeting.svelte';
-	import MeetingCard from '$lib/components/root/club/meeting_card.svelte';
+	import MeetingCard from '$lib/components/root/club//meeting_card.svelte';
 	import { db } from '$lib/config/firebase.js';
 	import type { Meeting } from '$lib/server/meetings.js';
 	import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+	import { setContext } from 'svelte';
 	import { readable } from 'svelte/store';
 
 	export let data;
@@ -23,6 +24,8 @@
 		);
 		return unsubscribe;
 	});
+	console.log('clubId from club page', clubId);
+	setContext('club', { id: clubId, name: clubName });
 </script>
 
 <h1 class="h1">{clubName}</h1>
@@ -32,8 +35,12 @@
 
 <h2 class="h2 mb-4">Meetings</h2>
 
-<CreateMeeting {clubId} />
+<CreateMeeting />
 
-{#each $meetings as meeting}
-	<MeetingCard {meeting} />
-{/each}
+<div class="flex flex-wrap gap-4">
+	{#each $meetings as meeting}
+		<div class="item">
+			<MeetingCard {meeting} />
+		</div>
+	{/each}
+</div>

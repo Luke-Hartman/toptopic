@@ -17,6 +17,10 @@ export interface Meeting {
  * @param clubId The invite code of the club.
  */
 export const createMeeting = async (clubId: string) => {
+    if (!clubId) {
+        console.log("No club ID provided.");
+        return;
+    }
     await addDoc(collection(db, "clubs", clubId, "meetings"), {
         date: Timestamp.fromDate(new Date()),
     });

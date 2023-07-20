@@ -1,6 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
-	import CopyInviteCode from '../copy_invite_code.svelte';
+	import CopyInviteCode from '$lib/components/copy_invite_code.svelte';
 
 	export let clubName = 'ERROR';
 	export let clubId = 'ERROR';
@@ -15,6 +15,6 @@
 			class="btn btn variant-filled-primary w-full font-semibold"
 			on:click={() => goto(`/club/${clubId}`)}>Enter</button
 		>
-		<CopyInviteCode {clubId} />
+		<CopyInviteCode {clubId} maxFit />
 	</div>
 </div>
